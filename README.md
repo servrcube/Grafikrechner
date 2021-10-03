@@ -1,0 +1,3 @@
+# Grafikrechner
+
+Simple graphing calculator
