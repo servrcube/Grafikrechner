@@ -54,11 +54,11 @@ class coords:
                     tmp += [self.localCoords(current_x , current_y)]
                     
             except ValueError as error:
-                print(error)
-                """if error == "math domain error:
+                if str(error) == "math domain error":
                     pass
                 else:
-                    exec(f"raise {error.__class__.__name__}(error)")"""
+                    raise Exception(error)
+                    #exec(f"raise {error.__class__.__name__}(error)")"""
 
             current_x += self.dx
         return tmp
