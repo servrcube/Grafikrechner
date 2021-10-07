@@ -1,12 +1,5 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[246]:
-
-
 #one nested list ist one column
-x = [[1,0],[0,1]]
-y = [[1,2],[1,6]]
+# eg. x = [[1,0]<-col,[0,1]]<-matrix
 
 #note to lists
 """
@@ -132,3 +125,31 @@ def mult(a,b):
 
     return tmpMat
 
+class matrix:
+    def __init__(self,value):
+        self.value = value
+        self.dim = dim(value)
+    
+    def __add__(self,other):
+        if type(other) != matrix:
+            raise TypeError(f"unsupported operand type(s) for +: '{type(other)}' and 'matrix'")
+        return matrix(add(self.value,other.value))
+    
+    def __sub__(self,other):
+        if type(other) != matrix:
+            raise TypeError(f"unsupported operand type(s) for -: '{type(other)}' and 'matrix'")
+        return matrix(sub(self.value,other.value))
+    
+    def __mul__(self,other):
+        if type(other) != matrix:
+            raise TypeError(f"unsupported operand type(s) for *: '{type(other)}' and 'matrix'")
+        return matrix(mult(self.value,other.value))
+    
+    def getRows(self):
+        tmp = []
+        for r in range(self.dim[1]):
+            tmpInter = []
+            for p in range(self.dim[0]):
+                tmpInter += [self.value[p][r]]
+            tmp += [tmpInter]
+        return matrix(tmp)
