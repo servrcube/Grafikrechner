@@ -1,10 +1,8 @@
 from matrix import *
-from math import *
 
 
 class WindowDimError(Exception):
     pass
-
 
 #coordinate system
 class coords:
