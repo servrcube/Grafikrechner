@@ -45,7 +45,8 @@ def dot(a,b):
         tmp += abs(matA) * abs(matB)
     
     return tmp
-    
+
+#add two matricies    
 def add(a,b):
     
     dimA = dim(a)
@@ -53,7 +54,7 @@ def add(a,b):
 
     if dimA != dimB: 
         raise ValueError("To add matrices, the matrices must have the same dimensions")
-        
+
     tmp = []
     for x in range(dimA[0]):
         tmpInter = []
@@ -63,6 +64,7 @@ def add(a,b):
     
     return tmp
 
+#subtract two matricies
 def sub(a,b):
     
     dimA = dim(a)
@@ -80,9 +82,10 @@ def sub(a,b):
     
     return tmp
 
-
+#multiply two matricies
 def mult(a,b):
     
+    # scalar matrix multiplication
     if type(a) == int:
         tmp = []
         dimB = dim(b) 
@@ -107,6 +110,8 @@ def mult(a,b):
 
             
         return tmp
+
+    #matrix matrix multiplication
     
     dimA = dim(a)
     dimB = dim(b)
@@ -146,6 +151,7 @@ class matrix:
         return matrix(mult(self.value,other.value))
     
     def getRows(self):
+        #converts the column -> list format to row -> list
         tmp = []
         for r in range(self.dim[1]):
             tmpInter = []
