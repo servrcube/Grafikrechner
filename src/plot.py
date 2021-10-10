@@ -35,9 +35,6 @@ class coords:
     
     def localCoords(self, x,y):
         return self.finalCoords(matrix([[x],[y]]))
-    
-    def makeGraph(self):
-        pass
       
     
     def runFunction(self, func):
