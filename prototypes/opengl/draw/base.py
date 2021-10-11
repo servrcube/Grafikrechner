@@ -3,7 +3,7 @@ import os
 import moderngl_window as mglw
 
 
-class Example(mglw.WindowConfig):
+class base(mglw.WindowConfig):
     gl_version = (3, 3)
     title = "ModernGL Example"
     window_size = (1280, 720)
