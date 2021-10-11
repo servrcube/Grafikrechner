@@ -10,6 +10,15 @@ class NoContent(Exception):
     pass
 
 
+"""
+
+    stores all instances of saved variables in file called cache.json
+    variables are stored as name.extension respectively
+
+
+"""
+
+
 def createFile(filePath: str):
     try:
         open(filePath,"x")
@@ -25,15 +34,19 @@ def delFile(filePath):
 
 
 #note: 
-#all created files will be overwritten when writeFile is used
+#all created files will be overwritten when write() is used with same instance name
 class cache:
 
     #creates file
-    def __init__(self, homeDir) -> None:
+    def __init__(self, homeDir, extension: str) -> None:
+
         self.homeDir = homeDir
         self.jsonCache = f"{homeDir}/cache.json"
+
         if not os.path.isfile(self.jsonCache):
             createFile(self.jsonCache)
+
+        self.extension = extension
     
 
     def readJsonCache(self):
@@ -71,7 +84,7 @@ class cache:
         self.writeJsonCache(dictFormat)
 
     def writeVar(self, var, instance):
-        filePath = f"{self.homeDir}/{instance}.window"
+        filePath = f"{self.homeDir}/{instance}.{self.extension}"
         createFile(filePath)
         file = open(filePath, "wb")
         pickle.dump(var,file)
@@ -79,7 +92,14 @@ class cache:
         self.addToJson(instance,filePath)
 
     def removeVar(self,instance):
-        filePath = f"{self.homeDir}/{instance}.window"
+        filePath = f"{self.homeDir}/{instance}.{self.extension}"
         delFile(filePath)
         self.removeFromJson(instance)
 
+    def readVar(self, instance):
+        jsonCacheDict = self.readJsonCache()
+        if instance in jsonCacheDict:
+            filePath = f"{self.homeDir}/{instance}.{self.extension}"
+            file = open(filePath, "rb") 
+            value = pickle.load(file)
+            return value
