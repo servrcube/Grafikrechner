@@ -130,24 +130,25 @@ def mult(a,b):
 
     return tmpMat
 
+def checkType(type, other):
+    if other != type:
+            raise TypeError("unsupported operand type(s) for +: '{}' and 'matrix'".join(other))
+
 class matrix:
     def __init__(self,value):
         self.value = value
         self.dim = dim(value)
     
     def __add__(self,other):
-        if type(other) != matrix:
-            raise TypeError(f"unsupported operand type(s) for +: '{type(other)}' and 'matrix'")
+        
         return matrix(add(self.value,other.value))
     
     def __sub__(self,other):
-        if type(other) != matrix:
-            raise TypeError(f"unsupported operand type(s) for -: '{type(other)}' and 'matrix'")
+        checkType(type(matrix),type(other))
         return matrix(sub(self.value,other.value))
     
     def __mul__(self,other):
-        if type(other) != matrix:
-            raise TypeError(f"unsupported operand type(s) for *: '{type(other)}' and 'matrix'")
+        checkType(type(matrix),type(other))
         return matrix(mult(self.value,other.value))
     
     def getRows(self):
