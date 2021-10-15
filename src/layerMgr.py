@@ -1,12 +1,15 @@
 class layer:
-    def __init__(self, coords: list):
+    def __init__(self, coords):
         self.value = coords
+    
+    def readValue(self):
+        return self.value
 
 
 
 class layerMgr:
 
-    def __init__(self) -> None:
+    def __init__(self):
         self.layerList = []
         self.layerDict = {}
         self.layerNpos = 0
@@ -29,7 +32,7 @@ class layerMgr:
         else:
             raise ValueError("invalid variable type\nuse int or str")
 
-    def addLayer(self, layerName: str, layer : layer ):
+    def addLayer(self, layerName, layer):
         self.layerDict.update({layerName: layer})
         self.setPos(layerName,None)
 
@@ -40,6 +43,13 @@ class layerMgr:
             del self.layerList[target]
         else:
             raise ValueError("invalid variable type\nuse int or str")
+    
+    def readValues(self,layer):
+        tmp = []
+        for x in self.layerDict[layer].value:
+            tmp += [[x.value[0][0],x.value[0][1]]]
+        return tmp
+        
 
 
 
