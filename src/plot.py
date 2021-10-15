@@ -60,10 +60,3 @@ class coords:
             
     def point(self, x,y):
         return self.localCoords(x,y)
-        
-            
-    
-        
-        
-
-
