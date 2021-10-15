@@ -8,7 +8,7 @@ class WindowDimError(Exception):
 class coords:
 
     #init coords
-    def __init__(self, dx, winDim: matrix, basis_vectors: matrix):
+    def __init__(self, dx, winDim, basis_vectors):
         
         #creates all variables
         self.dx = dx
@@ -24,7 +24,7 @@ class coords:
         if not (self.xmin < self.xmax and self.xmin <= 0 and self.xmax >= 0 and self.ymin <= self.ymax and self.ymin <= 0 and self.ymax >= 0):
             raise WindowDimError("\nplease check if \n xmin < xmax \n xmin < 0 \n xmax > 0 \n ymin < ymax \n ymin < 0 \n ymax > 0")
     
-    def finalCoords(self,coordinates: matrix):
+    def finalCoords(self,coordinates):
         x = self.basis_vectors
         tmp = []
         mult = coordinates.getRows().value
@@ -52,8 +52,8 @@ class coords:
                 if str(error) == "math domain error":
                     pass
                 else:
-                    raise Exception(error)
-                    #exec(f"raise {error.__class__.__name__}(error)")"""
+                    className = error.__class__
+                    raise className(error)
 
             current_x += self.dx
         return tmp
