@@ -1,6 +1,6 @@
 import os.path
 import pickle
-import json
+#import json
 
 class UseWrite(Exception):
     pass
@@ -10,7 +10,7 @@ class NoContent(Exception):
     pass
 
 
-def createFile(filePath: str):
+def createFile(filePath):
     try:
         open(filePath,"x")
     except:
@@ -29,9 +29,9 @@ def delFile(filePath):
 class cache:
 
     #creates file
-    def __init__(self, homeDir) -> None:
+    def __init__(self, homeDir):
         self.homeDir = homeDir
-        self.jsonCache = f"{homeDir}/cache.json"
+        self.jsonCache = "{}/cache.json".join(homeDir)
         if not os.path.isfile(self.jsonCache):
             createFile(self.jsonCache)
     
@@ -54,7 +54,7 @@ class cache:
         file.close()
 
         
-    def addToJson(self,instance: str,dir: str):
+    def addToJson(self,instance,dir):
         try:
             dictFormat = self.readJsonCache()
             dictFormat.update({instance:dir})
@@ -64,14 +64,14 @@ class cache:
             self.writeJsonCache(dictFormat)
         
     
-    def removeFromJson(self,instance: str):
+    def removeFromJson(self,instance):
 
         dictFormat = self.readJsonCache()
         del dictFormat[instance]
         self.writeJsonCache(dictFormat)
 
     def writeVar(self, var, instance):
-        filePath = f"{self.homeDir}/{instance}.window"
+        filePath = "{}/{}.window".join(self.homeDir,instance)
         createFile(filePath)
         file = open(filePath, "wb")
         pickle.dump(var,file)
@@ -79,7 +79,7 @@ class cache:
         self.addToJson(instance,filePath)
 
     def removeVar(self,instance):
-        filePath = f"{self.homeDir}/{instance}.window"
+        filePath = "{}/{}.window".join(self.homeDir,instance)
         delFile(filePath)
         self.removeFromJson(instance)
 
