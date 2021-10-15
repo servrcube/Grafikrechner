@@ -1,4 +1,7 @@
 import sys
+
+sys.path.append("..\\grafikrechner\\python27")
+
 from plot import *
 from sys import getsizeof
 from layerMgr import *
@@ -73,7 +76,7 @@ if __name__ == "__main__":
 
     #store output
 
-    cacheStore = cache("./cache","window")
+    cacheStore = cache("./cache","window30")
 
     cacheStore.writeVar(layers,"example")
 
