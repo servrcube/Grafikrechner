@@ -41,7 +41,7 @@ class cache:
     def __init__(self, homeDir, extension: str) -> None:
 
         self.homeDir = homeDir
-        self.jsonCache = f"{homeDir}/cache.json"
+        self.jsonCache = f"{homeDir}/cacheIndex.json"
 
         if not os.path.isfile(self.jsonCache):
             createFile(self.jsonCache)
