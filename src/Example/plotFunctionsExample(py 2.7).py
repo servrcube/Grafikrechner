@@ -76,7 +76,7 @@ if __name__ == "__main__":
 
     #store output
 
-    cacheStore = cache("./cache","window27")
+    cacheStore = cache("./cacheExample","window27")
         
     
     cacheStore.writeVar(layers,"example")

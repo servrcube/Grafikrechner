@@ -1,5 +1,6 @@
 *__pycache__/
 *.class
 *cache/
+!*\src\Example\cache
 
 
