@@ -7,7 +7,7 @@ Quickstart
 
 The fastest way you can get started is by using the plot module
 
-there are two versions of $project:
+there are two versions of Grafikrechner:
 
 - python 2.7
 - python 3.x

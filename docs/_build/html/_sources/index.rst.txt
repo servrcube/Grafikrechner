@@ -1,7 +1,7 @@
-$project
-========
+Grafikrechner
+=============
 
-$project is a simple graphing calulator
+Grafikrechner is a simple graphing calulator
 
 Features
 --------
@@ -13,11 +13,21 @@ Features
 Installation
 ------------
 
-Install $project by running:
+Install Grafikrechner by running:
 
     git clone https://github.com/servrcube/Grafikrechner
     
     or by downloading the zip
+
+
+Where to go now?
+^^^^^^^^^^^^^^^^
+
+.. toctree::
+   :maxdepth: 1
+
+   quickstart
+
 
 License
 -------
