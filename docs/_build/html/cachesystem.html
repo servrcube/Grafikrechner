@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+    <title>cache system &#8212; Grafikrechner 1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="layer manager" href="layers.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cache-system">
+<h1>cache system<a class="headerlink" href="#cache-system" title="Permalink to this headline">¶</a></h1>
+<section id="what-is-cachesys">
+<h2>What is cacheSys<a class="headerlink" href="#what-is-cachesys" title="Permalink to this headline">¶</a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h3>
+<p>CacheSys is a module to save variables to a file, so that they can be
+read by another program. All files are saved in a pickle format and indexed in a
+cacheStore.json file in the cache folder.</p>
+</section>
+<section id="what-problems-does-this-solve">
+<h3>What problems does this solve<a class="headerlink" href="#what-problems-does-this-solve" title="Permalink to this headline">¶</a></h3>
+<p>Normally if you were to store a variable to a file directly,it would
+only store a pointer to the variable,
+by pickling the variable you are able to store the individual values.</p>
+</section>
+</section>
+<section id="how-to-use-cachesys">
+<h2>How to use cacheSys<a class="headerlink" href="#how-to-use-cachesys" title="Permalink to this headline">¶</a></h2>
+<p>Remember to include the folder in your sys.path, <a class="reference external" href="quickstart.html#id1">how
+to?</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cacheSys</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1">#use a directory for storing your variables</span>
+<span class="n">cachePath</span> <span class="s2">&quot;./path/to/your/cache/&quot;</span>
+<span class="c1">#pick a extension (all files are stored in pickle format)</span>
+<span class="n">extention</span> <span class="o">=</span> <span class="s2">&quot;example&quot;</span>
+
+<span class="c1">#init the cache class</span>
+<span class="n">cache</span> <span class="o">=</span> <span class="n">cache</span><span class="p">(</span><span class="n">cachePath</span><span class="p">,</span> <span class="n">extention</span><span class="p">)</span>
+
+<span class="n">yourVar</span> <span class="o">=</span> <span class="s2">&quot;your Value&quot;</span>
+
+<span class="c1">#inststance name to store and access your variable</span>
+<span class="n">instanceName</span> <span class="o">=</span> <span class="s2">&quot;exampleVar&quot;</span>
+
+<span class="c1">#Note: you can store the same variable under diffrent instance names</span>
+<span class="c1">#but storing to the same instance name will overrite the instance</span>
+
+<span class="c1">#to store a variable</span>
+<span class="n">cache</span><span class="o">.</span><span class="n">writeVar</span><span class="p">(</span><span class="n">yourVar</span><span class="p">,</span><span class="n">instance</span><span class="p">)</span>
+
+<span class="c1">#to read a variable</span>
+<span class="n">valueOfCachedVar</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">readVar</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span>
+
+<span class="c1">#to delete a variable</span>
+<span class="n">cache</span><span class="o">.</span><span class="n">removeVar</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>your cached variables will indexed in a JSON file called jsonStore.json
+like this:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;exampleVar&quot;</span><span class="p">:</span> <span class="s2">&quot;./path/to/your/cache/exampleVar.example&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Grafikrechner</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matrix.html">matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="drawFunction.html">plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="layers.html">layer manager</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">cache system</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-cachesys">What is cacheSys</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-problems-does-this-solve">What problems does this solve</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-use-cachesys">How to use cacheSys</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="layers.html" title="previous chapter">layer manager</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Soham Kuvalekar.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/cachesystem.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
