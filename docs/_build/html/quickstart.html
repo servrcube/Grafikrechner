@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
 
-    <title>How to use &#8212; Grafikrechner 1 documentation</title>
+    <title>Get started &#8212; Grafikrechner 1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -15,6 +15,7 @@
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="plot" href="drawFunction.html" />
     <link rel="prev" title="Grafikrechner" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -32,11 +33,11 @@
 
           <div class="body" role="main">
             
-  <section id="how-to-use">
-<h1>How to use<a class="headerlink" href="#how-to-use" title="Permalink to this headline">¶</a></h1>
+  <section id="get-started">
+<h1>Get started<a class="headerlink" href="#get-started" title="Permalink to this headline">¶</a></h1>
 <section id="quickstart">
 <h2>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h2>
-<p>The fastest way you can get started is by using the plot module</p>
+<p>The fastest way you can get started is by using the simplePlot module</p>
 <p>there are two versions of Grafikrechner:</p>
 <ul class="simple">
 <li><p>python 2.7</p></li>
@@ -48,18 +49,70 @@
 <li><p>src/grafikrechner/python30</p></li>
 </ul>
 <p>as per your use case copy either verion to your project directory, the syntax is the same</p>
-<section id="first-program">
-<h3>First Program<a class="headerlink" href="#first-program" title="Permalink to this headline">¶</a></h3>
-<p>to get started import the the plot module,
-since the plot module is in another directory firstly add the directory to your python path:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;..</span><span class="se">\\</span><span class="s2">grafikrechner</span><span class="se">\\</span><span class="s2">python27&quot;</span><span class="p">)</span>
+<section id="id1">
+<h3>Get started<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>to get started import the the simplePlot module,
+since the plot module is in another directory firstly add the directory to your python path</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">path</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">python30&quot;</span><span class="p">)</span>
+<span class="c1">#or \\path\\to\\python27</span>
 </pre></div>
 </div>
-<p>now you can import the plot.py module:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">plot</span> <span class="kn">import</span> <span class="o">*</span>
+<p>now you can import the simplePlot module</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">simplePlot</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 </div>
+<section id="simpleplot-functions">
+<h4>Simpleplot functions<a class="headerlink" href="#simpleplot-functions" title="Permalink to this headline">¶</a></h4>
+<p>Firstly initalize the simplePlot function by passsing height and width
+note, the centre will be at height/2,width/2 like a normal coordinate system</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">height</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mi">500</span>
+
+<span class="n">plot</span> <span class="o">=</span> <span class="n">simplePlot</span><span class="p">(</span><span class="n">height</span><span class="p">,</span><span class="n">width</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>this will also automatically create a cache folder with a jsonStore.json file</p>
+<p>You can pass function with lambda or like a normal function with def</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#simple function with lambda</span>
+<span class="n">exampleFunction</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span>
+
+<span class="c1">#normal def</span>
+<span class="k">def</span> <span class="nf">exampleFunction2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>You can use runFunction to run your labda or def function</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#run the functions to get the x and y coordinates</span>
+
+<span class="c1">#lambda</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">runFunction</span><span class="p">(</span><span class="n">exampleFunction</span><span class="p">)</span>
+<span class="c1">#def</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">runFunction</span><span class="p">(</span><span class="n">exampleFunction2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To get the plotted values use getFunction:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="o">.</span><span class="n">getFunction</span><span class="p">(</span><span class="s2">&quot;exampleFunction&quot;</span><span class="p">)</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">getFunction</span><span class="p">(</span><span class="s2">&quot;exampleFunction2&quot;</span><span class="p">)</span>
+
+<span class="n">saveName</span> <span class="o">=</span> <span class="s2">&quot;name_of_your_file&quot;</span>
+</pre></div>
+</div>
+<p>You can save the output to your cache, it wil be saved as save + your file name</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">saveName</span> <span class="o">=</span> <span class="s2">&quot;exampleName&quot;</span>
+
+<span class="n">plot</span><span class="o">.</span><span class="n">saveFunctions</span><span class="p">(</span><span class="n">saveName</span><span class="p">)</span>
+
+<span class="c1">#to get the saved contents</span>
+<span class="c1">#note make sure that the same python version is used</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">readFromCache</span><span class="p">(</span><span class="n">saveName</span><span class="p">)</span>
+<span class="c1">#file name: save_saveName.window27 or .window30</span>
+
+<span class="c1">#to see which functions were plotted</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">listFunctions</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 </section>
@@ -82,7 +135,19 @@ since the plot module is in another directory firstly add the directory to your 
 
 <h3>Navigation</h3>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">How to use</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Get started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quickstart">Quickstart</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Get started</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#simpleplot-functions">Simpleplot functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="drawFunction.html">plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="layers.html">layer manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cachesystem.html">cache system</a></li>
 </ul>
 
 <div class="relations">
@@ -90,6 +155,7 @@ since the plot module is in another directory firstly add the directory to your 
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="index.html" title="previous chapter">Grafikrechner</a></li>
+      <li>Next: <a href="drawFunction.html" title="next chapter">plot</a></li>
   </ul></li>
 </ul>
 </div>
