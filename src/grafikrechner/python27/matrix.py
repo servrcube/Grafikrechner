@@ -1,10 +1,6 @@
 #one nested list ist one column
 # eg. x = [[1,0]<-col,[0,1]]<-matrix
 
-#exception(s)
-class InvalidMatrix(Exception):
-    pass
-
 #note to lists
 """
     using * to create size of list, actually just makes copies and not new instances:
@@ -23,26 +19,15 @@ class InvalidMatrix(Exception):
     to avoid this I used for:
     [[0 for y in range(n)] for x in range(n)]
 
-    happens because when [x] * n is used
-    [n1]--|
-    [n2]--|
-    [n3]---> [x] location in memory
-
-    instead of  
-    [n1]--> copy of [x] 
-    [n2]--> copy of [x] 
-    [n3]--> copy of [x] 
-    
-
 """
      
-#gives dimementions of a matrix -> nested list in format: [width,height]
+#gives dimementions of a list in format: [x,y]
 def dim(x):
     prevLen = len(x[0])
     for i in x:
         currentLen = len(i)
         if currentLen != prevLen:
-            raise InvalidMatrix('matrix is irregular make sure every row and column length is the same')
+            raise IndexError('matrix is irregular make sure Row and Column lengths are the same')
             
         
     return len(x),len(x[0])
@@ -53,7 +38,7 @@ def dot(a,b):
     dimB = len(b)
 
     if dimA != dimB: 
-        raise InvalidMatrix("row and column lengths do not match")
+        raise ValueError("row and column lengths do not match")
     
     tmp = 0
     for matA,matB in zip(a,b):
@@ -68,7 +53,7 @@ def add(a,b):
     dimB = dim(b)
 
     if dimA != dimB: 
-        raise InvalidMatrix("To add matrices, the matrices must have the same dimensions")
+        raise ValueError("To add matrices, the matrices must have the same dimensions")
 
     tmp = []
     for x in range(dimA[0]):
@@ -86,7 +71,7 @@ def sub(a,b):
     dimB = dim(b)
 
     if dimA != dimB: 
-        raise InvalidMatrix("To subtract matrices, the matrices must have the same dimensions")
+        raise ValueError("To subtract matrices, the matrices must have the same dimensions")
         
     tmp = []
     for x in range(dimA[0]):
@@ -100,7 +85,7 @@ def sub(a,b):
 #multiply two matricies
 def mult(a,b):
     
-    # scalar * matrix multiplication
+    # scalar matrix multiplication
     if type(a) == int:
         tmp = []
         dimB = dim(b) 
@@ -126,7 +111,7 @@ def mult(a,b):
             
         return tmp
 
-    #matrix * matrix multiplication
+    #matrix matrix multiplication
     
     dimA = dim(a)
     dimB = dim(b)
@@ -145,40 +130,38 @@ def mult(a,b):
 
     return tmpMat
 
+
 def checkType(type, other):
-    if other != type:
-            raise TypeError("unsupported operand type(s) for +: '{}' and 'matrix'".format(other))
+    if type(other) != type:
+            raise TypeError("unsupported operand type(s) for -: '{}' and 'matrix'".join(type(other)))
+        
 
 class matrix:
     def __init__(self,value):
         self.value = value
         self.dim = dim(value)
     
-
-    """
-        magic methods (dunder methods [dunder -> __ <-])
-        x is the value of the class value -> self.value
-        y is the value passed
-        __add__: x + y
-        __sub__: x - y
-        __mul__: x * y
-    
-    
-    """
     def __add__(self,other):
-        checkType(type(matrix),type(other))
+        checkType(type(matrix), type(other))
         return matrix(add(self.value,other.value))
     
     def __sub__(self,other):
-        checkType(type(matrix),type(other))
+        checkType(type(matrix), type(other))
         return matrix(sub(self.value,other.value))
     
     def __mul__(self,other):
-        checkType(type(matrix),type(other))
-        return matrix(mult(self.value,other.value))
+        try:
+            checkType(type(matrix), type(other))
+            return matrix(sub(self.value,other.value))
+        except:
+            try:
+                checkType(type(int), type(other))
+                return matrix(sub(self.value,other))
+            except:
+                pass
     
-    #converts the column -> list format to row -> list
     def getRows(self):
+        #converts the column -> list format to row -> list
         tmp = []
         for r in range(self.dim[1]):
             tmpInter = []

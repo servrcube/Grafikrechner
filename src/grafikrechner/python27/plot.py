@@ -16,7 +16,6 @@ class coords:
         #defines limits
         self.xmin , self.xmax = winDim.getRows().value[0]
         self.ymin , self.ymax = winDim.getRows().value[1]
-
         #unit vectors
         self.basis_vectors = basis_vectors
         
@@ -52,11 +51,17 @@ class coords:
                 if str(error) == "math domain error":
                     pass
                 else:
-                    className = error.__class__
-                    raise className(error)
+                    raise error.__class__(error)
 
             current_x += self.dx
         return tmp
             
     def point(self, x,y):
         return self.localCoords(x,y)
+        
+            
+    
+        
+        
+
+

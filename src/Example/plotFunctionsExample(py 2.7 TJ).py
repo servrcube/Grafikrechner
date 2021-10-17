@@ -16,7 +16,7 @@ from cacheSys import *
 #the size of a step of change in x
 dx = 0.01
 
-#dimentions of graph positive and negative axis following order: xmin,xmax,ymin,ymax
+#dimentions of graph positive and negative axis following order: xmin,ymin,xmax,ymax
 winDim = matrix([[-500,-500],[500,500]])
 
 #basis vectors

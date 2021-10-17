@@ -1,8 +1,7 @@
-import os
+import os.path
 import pickle
 import json
 
-#exceptions
 class UseWrite(Exception):
     pass
 class FileNotFound(Exception):
@@ -11,14 +10,22 @@ class NoContent(Exception):
     pass
 
 
-#simple file operations with custom exceptions
+"""
+
+    stores all instances of saved variables in file called cache.json
+    variables are stored as name.extension respectively
+
+
+"""
+
+
 def createFile(filePath):
     try:
-        f = open(filePath,"w")
-        f.close()
+        open(filePath,"x")
     except:
         raise UseWrite("File already exists")
 
+#deletes file
 def delFile(filePath):
     if os.path.isfile(filePath) == True:
         os.remove(filePath)
@@ -27,21 +34,21 @@ def delFile(filePath):
 
 
 #note: 
-#created file will be overwritten when write is used
-
-#a JSON file is created to store index of all cached instances (variables)
+#all created files will be overwritten when write() is used with same instance name
 class cache:
 
     #creates file
     def __init__(self, homeDir, extension):
+
         self.homeDir = homeDir
-        self.jsonCache = "{}/cacheStore.json".format(homeDir)
+        self.jsonCache = "{}/cacheIndex.json".format(homeDir)
+
         if not os.path.isfile(self.jsonCache):
             createFile(self.jsonCache)
-        
+
         self.extension = extension
     
-    
+
     def readJsonCache(self):
         file = open(self.jsonCache,"r")
         fileContent = str(file.read())
@@ -49,9 +56,23 @@ class cache:
             dictFormat = json.loads(fileContent)
             file.close()
             return dictFormat
-        except ValueError:
-            file.close()
-            raise NoContent("no content in file")
+        except Exception as error:
+            try:
+                if type(error) == json.JSONDecodeError:
+                    file.close()
+                    raise NoContent("no content in file")
+            except:
+                if type(error) == ValueError:
+                    file.close()
+                    raise NoContent("no content in file")
+                else:
+                    raise error.__class__(error)
+
+    
+    def writeJsonCache(self, content):
+        file = open(self.jsonCache, "w")
+        file.write(json.dumps(content, indent=4))
+        file.close()
 
         
     def addToJson(self,instance,dir):
@@ -70,25 +91,8 @@ class cache:
         del dictFormat[instance]
         self.writeJsonCache(dictFormat)
 
-    #write to the json file
-    def writeJsonCache(self, content):
-        file = open(self.jsonCache, "w")
-        file.write(json.dumps(content, indent=4))
-        file.close()
-
-
-    #work with picked file formats (binary)
-    #auto use JSON cache
-
-    """
-        if pickle is not used, python would only store a pointer to the variable in memory.
-        pickle converts the value of the variable to binary format and stores it to a file 
-        making sure that the variable will be read correctly and always available
-    
-    """
     def writeVar(self, var, instance):
         filePath = "{}/{}.{}".format(self.homeDir,instance,self.extension)
-        createFile(filePath)
         file = open(filePath, "wb")
         pickle.dump(var,file)
         file.close()
@@ -106,4 +110,3 @@ class cache:
             file = open(filePath, "rb") 
             value = pickle.load(file)
             return value
-

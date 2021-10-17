@@ -1,3 +1,7 @@
+import sys
+
+sys.path.append("..\\grafikrechner\\python27")
+
 from cacheSys import *
 from matrix import *
 from gturtle import *
@@ -14,7 +18,7 @@ if __name__ == "__main__":
     setPlaygroundSize(500, 500)  
     
     #use the stored cache (a folder)
-    cache = cache("./cache","window")
+    cache = cache("./cacheExample","windowTJ")
     
     window = cache.readVar("example")  
 

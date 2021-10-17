@@ -56,9 +56,17 @@ class cache:
             dictFormat = json.loads(fileContent)
             file.close()
             return dictFormat
-        except json.JSONDecodeError:
-            file.close()
-            raise NoContent("no content in file")
+        except Exception as error:
+            try:
+                if type(error) == json.JSONDecodeError:
+                    file.close()
+                    raise NoContent("no content in file")
+            except:
+                if type(error) == ValueError:
+                    file.close()
+                    raise NoContent("no content in file")
+                else:
+                    raise error.__class__(error)
 
     
     def writeJsonCache(self, content):
@@ -85,7 +93,6 @@ class cache:
 
     def writeVar(self, var, instance):
         filePath = f"{self.homeDir}/{instance}.{self.extension}"
-        createFile(filePath)
         file = open(filePath, "wb")
         pickle.dump(var,file)
         file.close()

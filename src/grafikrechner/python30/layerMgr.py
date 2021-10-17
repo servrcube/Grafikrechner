@@ -13,13 +13,8 @@ class layerMgr:
 
     def setPos(self,layerName, Npos ):
 
-        if layerName in self.layerList and Npos != None:
+        if layerName in self.layerList:
             self.layerList.insert(Npos, self.layerList.pop(self.layerList.index(layerName)))
-        elif Npos != None:
-            self.layerList.insert(Npos, layerName)
-        else:
-            self.layerList += [layerName]
-            self.layerNpos += 1 
 
     def find(self, target):
         if type(target) == str:
@@ -28,6 +23,7 @@ class layerMgr:
             return self.layerList[target]
         else:
             raise ValueError("invalid variable type\nuse int or str")
+    
 
     def addLayer(self, layerName: str, layer : layer ):
         self.layerDict.update({layerName: layer})
@@ -36,11 +32,12 @@ class layerMgr:
     def remove(self, target):
         if type(target) == str:
             self.layerList.remove(target)
+            self.layerDict.remove(target)
         elif type(target) == int:
+            del self.layerDict[self.layerList[target]]
             del self.layerList[target]
         else:
             raise ValueError("invalid variable type\nuse int or str")
-
 
 
 

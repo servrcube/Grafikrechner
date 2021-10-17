@@ -150,8 +150,15 @@ class matrix:
         return matrix(sub(self.value,other.value))
     
     def __mul__(self,other):
-        checkType(type(matrix), type(other))
-        return matrix(sub(self.value,other.value))
+        try:
+            checkType(type(matrix), type(other))
+            return matrix(sub(self.value,other.value))
+        except:
+            try:
+                checkType(type(int), type(other))
+                return matrix(sub(self.value,other))
+            except:
+                pass
     
     def getRows(self):
         #converts the column -> list format to row -> list
