@@ -24,10 +24,12 @@ Where to go now?
 ^^^^^^^^^^^^^^^^
 
 .. toctree::
-   :maxdepth: 1
-
-   quickstart
-
+    
+    quickstart
+    matrix
+    drawFunction
+    layers
+    cachesystem
 
 License
 -------
